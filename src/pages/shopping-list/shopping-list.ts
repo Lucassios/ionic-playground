@@ -3,8 +3,8 @@ import {IonicPage, PopoverController, LoadingController, AlertController} from '
 import { ShoppingListService } from "../../services/shopping-list";
 import {NgForm} from "@angular/forms";
 import {Ingredient} from "../../models/ingredient";
-import {SLOptionsPage} from "./sl-options/sl-options";
 import {AuthService} from "../../services/auth";
+import {DatabaseOptionsPage} from "../database-options/database-options";
 
 @IonicPage()
 @Component({
@@ -45,9 +45,10 @@ export class ShoppingListPage {
     const loading = this.loadingController.create({
       content: 'Please wait...'
     });
-    const popover = this.popoverController.create(SLOptionsPage);
+    const popover = this.popoverController.create(DatabaseOptionsPage);
     popover.present({ev: event});
     popover.onDidDismiss(data => {
+      if (!data) return;
       if (data.action == 'load') {
         loading.present();
         this.authService.getActiveUser().getToken()

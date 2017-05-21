@@ -41,8 +41,12 @@ export class ShoppingListService {
     return this.http.get('https://ionic3-recipebook-playground.firebaseio.com/' + uid + '/shopping-list.json?auth=' + token)
       .map((response : Response) => {
         return response.json();
-      }).do(data => {
-        this.ingredients = data;
+      }).do((ingredients: Ingredient[]) => {
+        if (ingredients) {
+          this.ingredients = ingredients;
+        } else {
+          this.ingredients = [];
+        }
       });
   }
 

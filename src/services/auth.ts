@@ -14,4 +14,8 @@ export class AuthService {
     firebase.auth().signOut();
   }
 
+  getActiveUser() {
+    return firebase.auth().currentUser;
+  }
+
 }
